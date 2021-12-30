@@ -13,9 +13,6 @@ public class DogLauncher{
                 new Dog(15),
                 new Dog(20)
         };
-        Dog[] bigDogs1 = LargerThanFourNeighbors(dogs);
 
-        for(int k = 0; k < bigDogs1.length; k++)
-            System.out.println(bigDogs1[k].weightInPounds + " ");
     }
 }
