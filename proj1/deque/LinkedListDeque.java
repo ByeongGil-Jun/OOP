@@ -1,15 +1,18 @@
 package deque;
 
+import java.util.Deque;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> {
     private class Node {
         public T item;
         public Node next;
+        public Node prev;
 
-        public Node(T i, Node t) {
+        public Node(Node p, T i, Node t) {
             item = i;
             next = t;
+            prev = p;
         }
     }
 
@@ -17,28 +20,37 @@ public class LinkedListDeque<T> {
     private int size;
 
     public LinkedListDeque(){
-        sentinel =new Node(null, null);
+        sentinel =new Node(null, null, null);
+        sentinel.prev = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
     public LinkedListDeque(T x){
-        sentinel =new Node(null, null);
-        sentinel.next =new Node(x, null);
+        sentinel =new Node(null, null, null);
+        sentinel.next = new Node(sentinel, x, sentinel);
+        sentinel.prev = sentinel.next;0
         size = 1;
     }
 
 // Adds an item of type T to the front of the deque. You can assume that item is never null.
     public void addFirst(T item){
-
+        sentinel.next = new Node(sentinel, item, sentinel.next);
+        sentinel.next.next.prev = sentinel.next;
+        size += 1;
     }
 
 //Adds an item of type T to the back of the deque. You can assume that item is never null.
     public void addLast(T item){
-
+        sentinel.prev = new Node(sentinel.prev, item, sentinel);
+        sentinel.prev.prev.next = sentinel.prev;
+        size += 1;
     }
 
 //Returns true if deque is empty, false otherwise.
     public boolean isEmpty(){
+        if (sentinel.equals(sentinel.next) == true && sentinel.equals(sentinel.prev) == true)
+            return true;
         return false;
     }
 
@@ -76,12 +88,18 @@ public class LinkedListDeque<T> {
     public Iterator<T> iterator(){
         return null;
     }
-    
+
 //Returns whether or not the parameter o is equal to the Deque.
 // o is considered equal if it is a Deque and if it contains the same contents
 // (as goverened by the generic T’s equals method) in the same order.
     public boolean equals(Object o){
-        return false;
+        if(!(o instanceof Deque)) {
+            return false;
+        }
+        for(int i = 0; i < size; i++){
+
+        }
+        return true;
     }
 }
 
