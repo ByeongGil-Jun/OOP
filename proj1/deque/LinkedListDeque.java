@@ -62,7 +62,11 @@ public class LinkedListDeque<T> {
 //Prints the items in the deque from first to last, separated by a space.
 // Once all the items have been printed, print out a new line.
     public void printDeque(){
-
+        Node temp = sentinel.next;
+        while(temp.next != sentinel.next) {
+            System.out.println(temp.item);
+            temp = temp.next;
+        }
     }
 
 //Removes and returns the item at the front of the deque. If no such item exists, returns null.
@@ -96,10 +100,22 @@ public class LinkedListDeque<T> {
         if(!(o instanceof Deque)) {
             return false;
         }
-        for(int i = 0; i < size; i++){
+        LinkedListDeque te = (LinkedListDeque) o;
+        for(int i = 0; i < te.size(); i++){
 
         }
+
         return true;
+    }
+
+    public static void main(String[] args) {
+        LinkedListDeque<String> Deque = new LinkedListDeque<String>();
+        Deque.addFirst("2");
+        System.out.println(Deque.size());
+        Deque.addFirst("1");
+        Deque.addLast("3");
+        System.out.println(Deque.size());
+        Deque.printDeque();
     }
 }
 

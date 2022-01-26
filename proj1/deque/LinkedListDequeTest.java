@@ -14,7 +14,13 @@ public class LinkedListDequeTest {
      * && is the "and" operation. */
     public void addIsEmptySizeTest() {
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+        LinkedListDeque<String> test = new LinkedListDeque<String>();
+        assertTrue(test.isEmpty());
+        test.addFirst("first");
+        test.addLast("Last");
+        assertEquals(2, test.size());
+        assertFalse(test.isEmpty());
+        test.printDeque();
         /*
         LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
