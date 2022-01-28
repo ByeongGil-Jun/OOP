@@ -1,9 +1,8 @@
 package deque;
 
-import java.util.Deque;
 import java.util.Iterator;
 
-public class LinkedListDeque<T> implements deque.Deque<T> {
+public class LinkedListDeque<T> implements Deque<T> {
     private class Node {
         public T item;
         public Node next;
@@ -106,17 +105,28 @@ public class LinkedListDeque<T> implements deque.Deque<T> {
 // (as goverened by the generic T’s equals method) in the same order.
     @Override
     public boolean equals(Object o){
-        if(!(o instanceof Deque)) {
+        if(o instanceof  LinkedListDeque) {
+            LinkedListDeque te = (LinkedListDeque) o;
+            if (SizeEqual(this.size(), te.size())) {
+                for(int i = 0; i < this.size(); i++) {
+                    if(this.get(i) != te.get(i))
+                        return false;
+                }
+            }
+        } else if(o instanceof ArrayDeque) {
+            ArrayDeque te = (ArrayDeque) o;
+            for(int i = 0; i < te.size(); i++){
+
+            }
+        } else {
             return false;
         }
-        LinkedListDeque te = (LinkedListDeque) o;
-        for(int i = 0; i < te.size(); i++){
-
-        }
-
         return true;
     }
 
+    public boolean SizeEqual(int a, int b) {
+        return (a == b);
+    }
     public static void main(String[] args) {
         LinkedListDeque<String> Deque = new LinkedListDeque<String>();
         Deque.addFirst("2");

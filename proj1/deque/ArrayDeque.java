@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements deque.Deque<T>{
+public class ArrayDeque<T> implements Deque<T> {
 
     private class Node {
         public T item;
