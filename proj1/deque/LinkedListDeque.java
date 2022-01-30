@@ -105,24 +105,37 @@ public class LinkedListDeque<T> implements Deque<T> {
 // (as goverened by the generic T’s equals method) in the same order.
     @Override
     public boolean equals(Object o){
-        if(o instanceof  LinkedListDeque) {
-            LinkedListDeque te = (LinkedListDeque) o;
-            if (SizeEqual(this.size(), te.size())) {
-                for(int i = 0; i < this.size(); i++) {
-                    if(this.get(i) != te.get(i))
-                        return false;
-                }
-            }
-        } else if(o instanceof ArrayDeque) {
-            ArrayDeque te = (ArrayDeque) o;
-            for(int i = 0; i < te.size(); i++){
-
-            }
+        Deque temp = null;
+        if(o instanceof  Deque) {
+            temp = TypeCon(o);
         } else {
+            return false;
+        }
+        if(this.size() != temp.size())
+            return false;
+        if(!ItemEqual(this, temp)) {
             return false;
         }
         return true;
     }
+
+    public Deque TypeCon(Object o) {
+        if(o instanceof  LinkedListDeque) {
+            return (LinkedListDeque) o;
+        } else if(o instanceof ArrayDeque) {
+            return (ArrayDeque) o;
+        }
+        return null;
+    }
+
+    public boolean ItemEqual(Deque a, Deque b) {
+        for(int i = 0; i < a.size(); i++) {
+            if(a.get(i) != b.get(i))
+                return false;
+        }
+        return true;
+    }
+
 
     public boolean SizeEqual(int a, int b) {
         return (a == b);

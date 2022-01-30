@@ -21,6 +21,11 @@ public class LinkedListDequeTest {
         assertEquals(2, test.size());
         assertFalse(test.isEmpty());
         test.printDeque();
+
+        LinkedListDeque<String> test1 = new LinkedListDeque<String>("first");
+        test1.addLast("Last");
+        test1.addFirst("o");
+        assertFalse(test.equals(test1));
         /*
         LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
