@@ -75,14 +75,26 @@ public class LinkedListDeque<T> implements Deque<T> {
 
 //Removes and returns the item at the front of the deque. If no such item exists, returns null.
     @Override
-    public T removeFirst(){
-        return null;
+    public T removeFirst() {
+        if (isEmpty())
+            return null;
+        T item = sentinel.next.item;
+        sentinel.next.next.prev = sentinel;
+        sentinel.next = sentinel.next.next;
+        size --;
+        return item;
     }
 
 //Removes and returns the item at the back of the deque. If no such item exists, returns null.
     @Override
     public T removeLast() {
-        return null;
+        if (isEmpty())
+            return null;
+        T item = sentinel.prev.item;
+        sentinel.prev.prev.next = sentinel;
+        sentinel.prev = sentinel.prev.prev;
+        size --;
+        return item;
     }
 
 //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
