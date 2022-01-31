@@ -3,56 +3,66 @@ package deque;
 import java.util.Iterator;
 
 public class ArrayDeque<T> implements Deque<T> {
-
-    private class Node {
-        public T item;
-        public ArrayDeque.Node next;
-        public ArrayDeque.Node prev;
-
-        public Node(ArrayDeque.Node p, T i, ArrayDeque.Node t) {
-            item = i;
-            next = t;
-            prev = p;
-        }
-    }
-
-    private ArrayDeque.Node sentinel;
+    private T[] items;
     private int size;
+    private int nextFirst;
+    private int nextLast;
 
     public ArrayDeque(){
-        sentinel =new ArrayDeque.Node(null, null, null);
-        sentinel.prev = sentinel;
-        sentinel.next = sentinel;
+        items =(T[]) new Object[8];
+        nextFirst = 4;
+        nextLast = 5;
         size = 0;
     }
 
     public ArrayDeque(T x){
-        sentinel =new ArrayDeque.Node(null, null, null);
-        sentinel.next = new ArrayDeque.Node(sentinel, x, sentinel);
-        sentinel.prev = sentinel.next;
+        items =(T[]) new Object[8];
+        nextFirst = 4;
+        nextLast = 5;
+        items[nextFirst] = x;
+        nextFirst -= 1;
         size = 1;
     }
 
     // Adds an item of type T to the front of the deque. You can assume that item is never null.
     @Override
     public void addFirst(T item){
-        sentinel.next = new ArrayDeque.Node(sentinel, item, sentinel.next);
-        sentinel.next.next.prev = sentinel.next;
+        if (size == items.length)
+            resize(size * 2);
+        items[nextFirst] = item;
+        if (nextFirst == 0) {
+            nextFirst = items.length-1;
+        } else {
+            nextFirst -= 1;
+        }
         size += 1;
+    }
+    public void resize(int capacity) {
+        T[] a =(T[]) new Object[capacity];
+        for(int i = 0; i < size; i++) {
+            a[i] =items[i];
+        }
+        items = a;
     }
 
     //Adds an item of type T to the back of the deque. You can assume that item is never null.
     @Override
     public void addLast(T item){
-        sentinel.prev = new ArrayDeque.Node(sentinel.prev, item, sentinel);
-        sentinel.prev.prev.next = sentinel.prev;
+        if (size == items.length)
+            resize(size * 2);
+        items[nextLast] = item;
+        if (nextLast == items.length-1) {
+            nextLast = 0;
+        } else {
+            nextLast += 1;
+        }
         size += 1;
     }
 
     //Returns true if deque is empty, false otherwise.
     @Override
     public boolean isEmpty(){
-        if (sentinel.equals(sentinel.next) == true && sentinel.equals(sentinel.prev) == true)
+        if (size == 0)
             return true;
         return false;
     }
@@ -67,10 +77,14 @@ public class ArrayDeque<T> implements Deque<T> {
 // Once all the items have been printed, print out a new line.
     @Override
     public void printDeque(){
-        ArrayDeque.Node temp = sentinel.next;
-        while(temp.next != sentinel.next) {
-            System.out.println(temp.item);
-            temp = temp.next;
+        int temp = nextFirst+1;
+        while(temp != nextLast) {
+            System.out.println(items[temp]);
+            if (temp == items.length-1) {
+                temp = 0;
+            } else {
+                temp ++;
+            }
         }
     }
 
@@ -90,6 +104,13 @@ public class ArrayDeque<T> implements Deque<T> {
 // If no such item exists, returns null. Must not alter the deque!
     @Override
     public T get(int index){
+        if (size < index)
+            return null;
+        if (nextFirst + index <= items.length-1) {
+            return items[nextFirst + index];
+        } else if (nextLast - index >= 0) {
+            return items[nextLast - index];
+        }
         return null;
     }
     public T getrecursive(int index){

@@ -51,7 +51,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 //Returns true if deque is empty, false otherwise.
     @Override
     public boolean isEmpty(){
-        if (sentinel.equals(sentinel.next) == true && sentinel.equals(sentinel.prev) == true)
+        if (size == 0) //sentinel.equals(sentinel.next) == true && sentinel.equals(sentinel.prev) == true)
             return true;
         return false;
     }
@@ -101,7 +101,13 @@ public class LinkedListDeque<T> implements Deque<T> {
 // If no such item exists, returns null. Must not alter the deque!
     @Override
     public T get(int index){
-        return null;
+        if (size < index)
+            return null;
+        Node temp = sentinel;
+        for(int i = 0; i < index; i++) {
+            temp = temp.next;
+        }
+        return temp.item;
     }
     public T getrecursive(int index){
         return null;
@@ -123,7 +129,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         } else {
             return false;
         }
-        if(this.size() != temp.size())
+        if(size != temp.size())
             return false;
         if(!ItemEqual(this, temp)) {
             return false;
