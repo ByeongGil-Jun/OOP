@@ -94,16 +94,33 @@ public class ArrayDeque<T> implements Deque<T> {
     //Removes and returns the item at the front of the deque. If no such item exists, returns null.
     @Override
     public T removeFirst(){
-        if(isEmpty() == true)
+        if (isEmpty() == true)
             return null;
-
-        return null;
+        T RemoveVal;
+        if (nextFirst == items.length-1) {
+            nextFirst = 0;
+            RemoveVal = items[nextFirst];
+        } else {
+            nextFirst ++;
+            RemoveVal = items[nextFirst];
+        }
+        return RemoveVal;
     }
 
     //Removes and returns the item at the back of the deque. If no such item exists, returns null.
     @Override
     public T removeLast() {
-        return null;
+        if (isEmpty() == true)
+            return null;
+        T RemoveVal;
+        if (nextLast == 0) {
+            nextLast = items.length-1;
+            RemoveVal = items[nextLast];
+        } else {
+            RemoveVal = items[nextLast-1];
+            nextLast --;
+        }
+        return RemoveVal;
     }
 
     //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
