@@ -11,7 +11,7 @@ public class ArrayDequeTest {
 
     @Test
     public void randomizedTest(){
-        LinkedListDeque<Integer> L = new LinkedListDeque<Integer>();
+        ArrayDeque<Integer> L = new ArrayDeque<Integer>();
 
         int N = 500;
         for (int i = 0; i < N; i += 1) {

@@ -40,8 +40,11 @@ public class ArrayDeque<T> implements Deque<T> {
     public void resize(int capacity) {
         T[] a =(T[]) new Object[capacity];
         for(int i = 0; i < size; i++) {
-            a[i] =items[i];
+            a[i] = this.get(i+1);
         }
+        nextFirst = 2*size - 1;
+        nextLast = size;
+        size = size * 2;
         items = a;
     }
 
@@ -56,7 +59,7 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             nextLast += 1;
         }
-        size += 1;
+        size ++;
     }
 
     //Returns true if deque is empty, false otherwise.
@@ -91,6 +94,9 @@ public class ArrayDeque<T> implements Deque<T> {
     //Removes and returns the item at the front of the deque. If no such item exists, returns null.
     @Override
     public T removeFirst(){
+        if(isEmpty() == true)
+            return null;
+
         return null;
     }
 
