@@ -100,7 +100,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
 // If no such item exists, returns null. Must not alter the deque!
     @Override
-    public T get(int index){
+    public T get(int index) {
         if (size < index)
             return null;
         Node temp = sentinel;
@@ -109,7 +109,14 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
         return temp.item;
     }
-    public T getrecursive(int index){
+
+    //public T getRecursive(int index): Same as get, but uses recursion.
+    public T getrecursive(int index) {
+        if (index == 0) {
+            return sentinel.item;
+        } else {
+            getrecursive(index-1);
+        }
         return null;
     }
 
