@@ -9,6 +9,43 @@ import static org.junit.Assert.*;
 public class LinkedListDequeTest {
 
     @Test
+    public void RandomizedCompares() {
+        LinkedListDeque<Integer> L = new LinkedListDeque<Integer>();
+        ArrayDeque<Integer> M = new ArrayDeque<Integer>();
+
+        int N = 100000;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 7);
+            if (operationNumber == 0) {
+                // addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast(randVal);
+                M.addLast(randVal);
+                assertEquals(L.get(randVal), M.get(randVal));
+            } else if (operationNumber == 1) {
+                //addFirst
+            } else if (operationNumber == 2) {
+                // size
+                assertEquals(L.size(), M.size());
+            } else if (operationNumber == 3) {
+                //get
+                int index = StdRandom.uniform(0, 15);
+                assertEquals(L.get(index), M.get(index));
+            } else if (operationNumber == 4) {
+                //removeFirst
+                assertEquals(L.removeFirst(), M.removeFirst());
+            } else if (operationNumber == 5){
+                //removeLast
+                assertEquals(L.removeLast(), M.removeLast());
+            } else {
+                //Equals
+                assertTrue(L.equals(M));
+                assertTrue(M.equals(L));
+            }
+        }
+    }
+
+    @Test
     public void randomizedTest(){
         LinkedListDeque<Integer> L = new LinkedListDeque<Integer>();
 

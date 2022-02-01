@@ -124,40 +124,29 @@ public class LinkedListDeque<T> implements Deque<T> {
     @Override
     public boolean equals(Object o){
         Deque temp = null;
-        if(o instanceof  Deque) {
-            temp = TypeCon(o);
+        if(o instanceof  LinkedListDeque) {
+            temp = (LinkedListDeque) o;
+        } else if (o instanceof ArrayDeque){
+            temp = (ArrayDeque) o;
         } else {
             return false;
         }
         if(size != temp.size())
             return false;
-        if(!ItemEqual(this, temp)) {
+        if(!ItemEqual(temp)) {
             return false;
         }
         return true;
     }
 
-    public Deque TypeCon(Object o) {
-        if(o instanceof  LinkedListDeque) {
-            return (LinkedListDeque) o;
-        } else if(o instanceof ArrayDeque) {
-            return (ArrayDeque) o;
-        }
-        return null;
-    }
-
-    public boolean ItemEqual(Deque a, Deque b) {
+    public boolean ItemEqual(Deque a) {
         for(int i = 0; i < a.size(); i++) {
-            if(a.get(i) != b.get(i))
+            if(a.get(i) != get(i))
                 return false;
         }
         return true;
     }
 
-
-    public boolean SizeEqual(int a, int b) {
-        return (a == b);
-    }
     public static void main(String[] args) {
         LinkedListDeque<String> Deque = new LinkedListDeque<String>();
         Deque.addFirst("2");

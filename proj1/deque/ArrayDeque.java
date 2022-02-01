@@ -37,14 +37,13 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         size += 1;
     }
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         T[] a =(T[]) new Object[capacity];
         for(int i = 0; i < size; i++) {
             a[i] = this.get(i+1);
         }
         nextFirst = 2*size - 1;
         nextLast = size;
-        size = size * 2;
         items = a;
     }
 
@@ -100,10 +99,13 @@ public class ArrayDeque<T> implements Deque<T> {
         if (nextFirst == items.length-1) {
             nextFirst = 0;
             RemoveVal = items[nextFirst];
+            items[nextFirst] = null;
         } else {
             nextFirst ++;
             RemoveVal = items[nextFirst];
+            items[nextFirst] = null;
         }
+        size -= 1;
         return RemoveVal;
     }
 
@@ -116,10 +118,13 @@ public class ArrayDeque<T> implements Deque<T> {
         if (nextLast == 0) {
             nextLast = items.length-1;
             RemoveVal = items[nextLast];
+            items[nextLast] = null;
         } else {
-            RemoveVal = items[nextLast-1];
             nextLast --;
+            RemoveVal = items[nextLast];
+            items[nextLast] = null;
         }
+        size -= 1;
         return RemoveVal;
     }
 
@@ -127,14 +132,13 @@ public class ArrayDeque<T> implements Deque<T> {
 // If no such item exists, returns null. Must not alter the deque!
     @Override
     public T get(int index){
-        if (size < index)
+        if (size < index || index == 0)
             return null;
-        if (nextFirst + index <= items.length-1) {
+        if (nextFirst + index < items.length) {
             return items[nextFirst + index];
-        } else if (nextLast - index >= 0) {
-            return items[nextLast - index];
+        } else {
+            return items[nextFirst + index - items.length];
         }
-        return null;
     }
     public T getrecursive(int index){
         return null;
@@ -150,14 +154,27 @@ public class ArrayDeque<T> implements Deque<T> {
 // (as goverened by the generic T’s equals method) in the same order.
     @Override
     public boolean equals(Object o){
-        if(!(o instanceof java.util.Deque)) {
+        Deque temp = null;
+        if(o instanceof  LinkedListDeque) {
+            temp = (LinkedListDeque) o;
+        } else if (o instanceof ArrayDeque){
+            temp = (ArrayDeque) o;
+        } else {
             return false;
         }
-        ArrayDeque te = (ArrayDeque) o;
-        for(int i = 0; i < te.size(); i++){
-
+        if(size != temp.size())
+            return false;
+        if(!ItemEqual(temp)) {
+            return false;
         }
+        return true;
+    }
 
+    private boolean ItemEqual(Deque a) {
+        for(int i = 0; i <= a.size(); i++) {
+            if(a.get(i) != get(i))
+                return false;
+        }
         return true;
     }
 
