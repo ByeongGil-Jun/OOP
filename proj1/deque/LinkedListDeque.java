@@ -147,7 +147,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     public boolean ItemEqual(Deque a) {
-        for(int i = 0; i < a.size(); i++) {
+        for(int i = 1; i <= a.size(); i++) {
             if(a.get(i) != get(i))
                 return false;
         }

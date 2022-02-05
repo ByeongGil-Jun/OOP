@@ -1,32 +1,27 @@
 package deque;
 
-import java.util.Iterator;
+import afu.org.checkerframework.checker.oigj.qual.O;
 
-public class ArrayDeque<T> implements Deque<T> {
+import java.util.Iterator;
+import java.util.Comparator;
+
+public class MaxArrayDeque<T> implements Deque<T> {
     private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
+    private Comparator comparator;
 
-    public ArrayDeque(){
-        items =(T[]) new Object[8];
+    public MaxArrayDeque(Comparator<T> c) {
+        items = (T[]) new Object[8];
         nextFirst = 4;
         nextLast = 5;
+        comparator = c;
         size = 0;
     }
 
-    public ArrayDeque(T x){
-        items =(T[]) new Object[8];
-        nextFirst = 4;
-        nextLast = 5;
-        items[nextFirst] = x;
-        nextFirst -= 1;
-        size = 1;
-    }
-
-    // Adds an item of type T to the front of the deque. You can assume that item is never null.
     @Override
-    public void addFirst(T item){
+    public void addFirst(T item) {
         if (size == items.length)
             resize(size * 2);
         items[nextFirst] = item;
@@ -38,9 +33,8 @@ public class ArrayDeque<T> implements Deque<T> {
         size += 1;
     }
 
-    //Adds an item of type T to the back of the deque. You can assume that item is never null.
     @Override
-    public void addLast(T item){
+    public void addLast(T item) {
         if (size == items.length)
             resize(size * 2);
         items[nextLast] = item;
@@ -52,15 +46,13 @@ public class ArrayDeque<T> implements Deque<T> {
         size ++;
     }
 
-    //Returns true if deque is empty, false otherwise.
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         if (size == 0)
             return true;
         return false;
     }
 
-    //Returns the number of items in the deque.
     @Override
     public int size() {return size;}
 
@@ -74,10 +66,8 @@ public class ArrayDeque<T> implements Deque<T> {
         items = a;
     }
 
-    //Prints the items in the deque from first to last, separated by a space.
-// Once all the items have been printed, print out a new line.
     @Override
-    public void printDeque(){
+    public void printDeque() {
         int temp = nextFirst+1;
         while(temp != nextLast) {
             System.out.println(items[temp]);
@@ -89,9 +79,8 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
-    //Removes and returns the item at the front of the deque. If no such item exists, returns null.
     @Override
-    public T removeFirst(){
+    public T removeFirst() {
         if (isEmpty() == true)
             return null;
         T RemoveVal;
@@ -111,7 +100,6 @@ public class ArrayDeque<T> implements Deque<T> {
         return RemoveVal;
     }
 
-    //Removes and returns the item at the back of the deque. If no such item exists, returns null.
     @Override
     public T removeLast() {
         if (isEmpty() == true)
@@ -133,10 +121,8 @@ public class ArrayDeque<T> implements Deque<T> {
         return RemoveVal;
     }
 
-    //Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
-// If no such item exists, returns null. Must not alter the deque!
     @Override
-    public T get(int index){
+    public T get(int index) {
         if (size < index || index == 0)
             return null;
         if (nextFirst + index < items.length) {
@@ -146,16 +132,41 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
-    //The Deque objects we’ll make are iterable (i.e. Iterable<T>) so we must provide this method to return an iterator.
-    public Iterator<T> iterator(){
+    public T max() {
+        if (isEmpty() == true)
+            return null;
+        T max = null;
+        for(int i = 1; i < size; i++) {
+            if (comparator.compare(get(i), get(i+1)) > 0) {
+                max = get(i);
+            } else {
+                max = get(i+1);
+            }
+        }
+        return max;
+    }
+
+    public T max(Comparator<T> c) {
+        if (isEmpty() == true)
+            return null;
+        T max = null;
+        for(int i = 1; i < size; i++) {
+            if (c.compare(get(i), get(i+1)) > 0) {
+                max = get(i);
+            } else {
+                max = get(i+1);
+            }
+        }
+        return max;
+    }
+
+    //not yet
+    public Iterator<T> iterator() {
         return null;
     }
 
-    //Returns whether or not the parameter o is equal to the Deque.
-// o is considered equal if it is a Deque and if it contains the same contents
-// (as goverened by the generic T’s equals method) in the same order.
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         Deque temp = null;
         if(o instanceof  LinkedListDeque) {
             temp = (LinkedListDeque) o;
@@ -181,6 +192,18 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public static void main(String[] args) {
-
+        Comparator<String> c = new Comparator<>() {
+            @Override
+            public int compare(String o1, String o2) {
+                if (o1.length() > o2.length()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        };
+        MaxArrayDeque<String> a = new MaxArrayDeque<>(c);
+        a.addFirst("aaaa");
+        a.addFirst("bab");
     }
 }
