@@ -51,12 +51,10 @@ public class CapersRepository {
     public static void writeStory(String text) throws IOException {
         // TODO
         File s = Utils.join(CAPERS_FOLDER, "story","story.txt");
-        if (s.exists()) {
-            Utils.writeContents(s, text);
-        } else {
+        String prev = readContentsAsString(s);
+        if (!s.exists())
             s.createNewFile();
-            Utils.writeContents(s, text);
-        }
+        Utils.writeContents(s, prev, "\n", text);
         System.out.println(readContentsAsString(s));
     }
 
