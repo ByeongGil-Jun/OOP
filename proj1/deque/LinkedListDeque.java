@@ -112,12 +112,14 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     //public T getRecursive(int index): Same as get, but uses recursion.
     public T getrecursive(int index) {
-        if (index == 0) {
-            return sentinel.item;
+        if (size < index)
+            return null;
+        if (index == 1) {
+            return null;
         } else {
-            getrecursive(index-1);
+            sentinel.next = sentinel.next.next;
+            return getrecursive(index-1);
         }
-        return null;
     }
 
     private class LinkedListDequeIterator implements Iterator<T> {

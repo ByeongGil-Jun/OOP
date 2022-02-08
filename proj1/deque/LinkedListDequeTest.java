@@ -13,6 +13,14 @@ import static org.junit.Assert.*;
 public class LinkedListDequeTest {
 
     @Test
+    public void GetRecursiveTest() {
+        LinkedListDeque<Integer> L = new LinkedListDeque<>(1);
+        L.addLast(2);
+        System.out.println(L.getrecursive(2));
+        L.addLast(3);
+        L.printDeque();
+    }
+    @Test
     public void IteratorTest() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>(1);
         L.addLast(2);
