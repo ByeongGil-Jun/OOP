@@ -25,6 +25,7 @@ public class LinkedListDequeTest {
         LinkedListDeque<Integer> L = new LinkedListDeque<>(1);
         L.addLast(2);
         L.addLast(3);
+        L.printDeque();
         Iterator<Integer> a= L.iterator();
         while (a.hasNext()) {
             System.out.println(a.next());

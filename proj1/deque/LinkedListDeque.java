@@ -68,9 +68,10 @@ public class LinkedListDeque<T> implements Deque<T> {
     public void printDeque(){
         Node temp = sentinel.next;
         while(temp.next != sentinel.next) {
-            System.out.println(temp.item);
+            System.out.print(temp.item + " ");
             temp = temp.next;
         }
+        System.out.println();
     }
 
 //Removes and returns the item at the front of the deque. If no such item exists, returns null.
