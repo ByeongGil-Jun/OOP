@@ -1,13 +1,27 @@
 package deque;
 
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
 
+    @Test
+    public void IteratorTest() {
+        LinkedListDeque<Integer> L = new LinkedListDeque<>(1);
+        L.addLast(2);
+        L.addLast(3);
+        Iterator<Integer> a= L.iterator();
+        while (a.hasNext()) {
+            System.out.println(a.next());
+        }
+    }
     @Test
     public void RandomizedCompares() {
         LinkedListDeque<Integer> L = new LinkedListDeque<Integer>();

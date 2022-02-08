@@ -146,9 +146,25 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
+    public class ArrayDequeIterator implements Iterator<T> {
+        int pos;
+        public ArrayDequeIterator() {
+            pos = 1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return pos <= size;
+        }
+
+        @Override
+        public T next() {
+            return get(pos++);
+        }
+    }
     //The Deque objects we’ll make are iterable (i.e. Iterable<T>) so we must provide this method to return an iterator.
     public Iterator<T> iterator(){
-        return null;
+        return new ArrayDequeIterator();
     }
 
     //Returns whether or not the parameter o is equal to the Deque.

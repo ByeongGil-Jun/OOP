@@ -160,9 +160,25 @@ public class MaxArrayDeque<T> implements Deque<T> {
         return max;
     }
 
-    //not yet
-    public Iterator<T> iterator() {
-        return null;
+    public class MaxArrayDequeIterator implements Iterator<T> {
+        int pos;
+        public MaxArrayDequeIterator() {
+            pos = 1;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return pos <= size;
+        }
+
+        @Override
+        public T next() {
+            return get(pos++);
+        }
+    }
+    //The Deque objects we’ll make are iterable (i.e. Iterable<T>) so we must provide this method to return an iterator.
+    public Iterator<T> iterator(){
+        return new MaxArrayDequeIterator();
     }
 
     @Override

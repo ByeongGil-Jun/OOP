@@ -3,11 +3,24 @@ package deque;
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
 /** Performs some basic linked list tests. */
 public class ArrayDequeTest {
+
+    @Test
+    public void IteratorTest() {
+        ArrayDeque<Integer> A = new ArrayDeque<Integer>(1);
+        A.addLast(2);
+        A.addLast(3);
+        Iterator<Integer> b= A.iterator();
+        while (b.hasNext()) {
+            System.out.println(b.next());
+        }
+    }
 
     @Test
     public void randomizedTest(){

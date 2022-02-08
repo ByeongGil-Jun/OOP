@@ -4,12 +4,35 @@ import edu.princeton.cs.algs4.StdRandom;
 import net.sf.saxon.functions.Minimax;
 import org.junit.Test;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
 
 /** Performs some basic linked list tests. */
 public class MaxArrayDequeTest {
+
+    @Test
+    public void IteratorTest() {
+        Comparator<Integer> co = new Comparator<>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                if (o1 > o2) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        };
+
+        MaxArrayDeque<Integer> M = new MaxArrayDeque<Integer>(co);
+        M.addLast(2);
+        M.addLast(3);
+        Iterator<Integer> c= M.iterator();
+        while (c.hasNext()) {
+            System.out.println(c.next());
+        }
+    }
 
     @Test
     public void ComparatorTest() {
