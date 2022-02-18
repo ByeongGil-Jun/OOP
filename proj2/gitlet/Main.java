@@ -18,7 +18,6 @@ public class Main {
             case "init":
                 // TODO: handle the `init` command
                 validateNumArgs(args, 1);
-                Command.init();
                 break;
             case "add":
                 // TODO: handle the `add [filename]` command
