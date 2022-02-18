@@ -5,10 +5,21 @@ package gitlet;
 import java.util.Date; // TODO: You'll likely use this in this class
 
 /** Represents a gitlet commit object.
- *  TODO: It's a good idea to give a description here of what else this Class
- *  does at a high level.
+ *  Takes the version of the file as it exists in the head commit and puts it in the working directory,
+ *  overwriting the version of the file that’s already there if there is one.
+ *  The new version of the file is not staged.
  *
- *  @author TODO
+ * Takes the version of the file as it exists in the commit with the given id, and puts it in the working directory,
+ * overwriting the version of the file that’s already there if there is one.
+ * The new version of the file is not staged.
+ *
+ * Takes all files in the commit at the head of the given branch, and puts them in the working directory,
+ * overwriting the versions of the files that are already there if they exist. Also, at the end of this command,
+ * the given branch will now be considered the current branch (HEAD).
+ * Any files that are tracked in the current branch but are not present in the checked-out branch are deleted.
+ * The staging area is cleared, unless the checked-out branch is the current branch
+ *
+ *  @author Gily
  */
 public class Commit {
     /**
