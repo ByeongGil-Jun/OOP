@@ -44,4 +44,8 @@ public class Commit {
         message = mes;
         date = new Date();
     }
+    public Commit(String mes, String log) {
+        message = mes;
+        date = new Date();
+    }
 }

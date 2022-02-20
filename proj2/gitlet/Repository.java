@@ -30,6 +30,8 @@ public class Repository {
     public static final File Commit_DIR = join(GITLET_DIR, "commit");
     /** The blob directory. */
     public static final File Blob_DIR = join(GITLET_DIR, "blob");
+    /** The staging directory. */
+    public static final File Staging_DIR = join(GITLET_DIR, "staging");
 
     /* TODO: fill in the rest of this class. */
     public static void SetupPersistence() throws IOException {
@@ -39,9 +41,15 @@ public class Repository {
             GITLET_DIR.mkdir();
             Commit_DIR.mkdir();
             Blob_DIR.mkdir();
+            Staging_DIR.mkdir();
         }
         //handle branch master
         Commit InitCommit = new Commit("initial commit");
+    }
 
+    public static void staging(String name) {
+        /** if same file is exist, update just arrow
+         *  else, make copy file in staging_dir and update arrow
+         */
     }
 }

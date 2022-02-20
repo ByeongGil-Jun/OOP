@@ -14,13 +14,15 @@ public class Blob {
     private String name;
     /** The version of this Commit. */
     private String version;
+    /** The file */
+    private File file;
     /** The sha1 of this Commit. */
     private String sha1;
 
-    public String Blob(String n, String v) {
+    public Blob (String n, String v, File f) {
         name = n;
         version = v;
-        sha1 = Utils.sha1(name, version);
-        return sha1;
+        file = f;
+        sha1 = Utils.sha1(name, version, file);
     }
 }
