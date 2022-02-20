@@ -26,14 +26,22 @@ public class Repository {
     public static final File CWD = new File(System.getProperty("user.dir"));
     /** The .gitlet directory. */
     public static final File GITLET_DIR = join(CWD, ".gitlet");
+    /** The commit directory. */
+    public static final File Commit_DIR = join(GITLET_DIR, "commit");
+    /** The blob directory. */
+    public static final File Blob_DIR = join(GITLET_DIR, "blob");
 
     /* TODO: fill in the rest of this class. */
-    public static void CreateNewFolder() throws IOException {
+    public static void SetupPersistence() throws IOException {
         if (GITLET_DIR.exists()) {
             Utils.exitWithError("A Gitlet version-control system already exists in the current directory.");
         } else {
             GITLET_DIR.mkdir();
+            Commit_DIR.mkdir();
+            Blob_DIR.mkdir();
         }
         //handle branch master
+        Commit InitCommit = new Commit("initial commit");
+
     }
 }

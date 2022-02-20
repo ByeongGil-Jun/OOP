@@ -3,21 +3,15 @@ package gitlet;
 // TODO: any imports you need here
 
 import java.util.Date; // TODO: You'll likely use this in this class
+import java.util.LinkedList;
 
 /** Represents a gitlet commit object.
- *  Takes the version of the file as it exists in the head commit and puts it in the working directory,
- *  overwriting the version of the file that’s already there if there is one.
- *  The new version of the file is not staged.
- *
- * Takes the version of the file as it exists in the commit with the given id, and puts it in the working directory,
- * overwriting the version of the file that’s already there if there is one.
- * The new version of the file is not staged.
- *
- * Takes all files in the commit at the head of the given branch, and puts them in the working directory,
- * overwriting the versions of the files that are already there if they exist. Also, at the end of this command,
- * the given branch will now be considered the current branch (HEAD).
- * Any files that are tracked in the current branch but are not present in the checked-out branch are deleted.
- * The staging area is cleared, unless the checked-out branch is the current branch
+ *  Combinations of log messages, other metadata (commit date, author, etc.), a reference to a tree,
+ *  and references to parent commits.
+ *  The repository also maintains a mapping from branch heads to references to commits,
+ *  so that certain important commits have symbolic names.
+ *  file should represent blob's sha1.
+ *  log should represent sha1 of prev commit.
  *
  *  @author Gily
  */
@@ -32,9 +26,22 @@ public class Commit {
 
     /** The message of this Commit. */
     private String message;
+    /** The date of this Commit. */
+    private Date date;
+    /** The author of this Commit. */
+    private String author;
+    /** The reference to a tree. */
+    private String tree;
+    /** The reference to a parent. */
+    private String parent;
+    /** The log of this Commit. */
+    private String log;
+    /** The file list of this Commit. */
+    private LinkedList files = new LinkedList();
 
     /* TODO: fill in the rest of this class. */
-    public void Commit(String mes) {
+    public Commit(String mes) {
         message = mes;
+        date = new Date();
     }
 }
