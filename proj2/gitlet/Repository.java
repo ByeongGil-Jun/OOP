@@ -34,7 +34,7 @@ public class Repository {
     public static final File Staging_DIR = join(GITLET_DIR, "staging");
 
     /* TODO: fill in the rest of this class. */
-    public static void SetupPersistence() throws IOException {
+    public static void SetupPersistence() {
         if (GITLET_DIR.exists()) {
             Utils.exitWithError("A Gitlet version-control system already exists in the current directory.");
         } else {
@@ -47,9 +47,10 @@ public class Repository {
         Commit InitCommit = new Commit("initial commit");
     }
 
-    public static void staging(String name) {
+    public static void StagingAdd(String name) throws IOException{
         /** if same file is exist, update just arrow
          *  else, make copy file in staging_dir and update arrow
          */
+        Utils.CopyFile(join(GITLET_DIR, name), Staging_DIR);
     }
 }

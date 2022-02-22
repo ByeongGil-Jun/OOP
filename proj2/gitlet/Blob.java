@@ -1,6 +1,7 @@
 package gitlet;
 
 import java.io.File;
+import java.io.Serializable;
 
 /** Represents a gitlet blob object.
  * The saved contents of files.
@@ -9,10 +10,10 @@ import java.io.File;
  *
  *  @author Gily
  */
-public class Blob {
+public class Blob implements Serializable {
     /** The name of this Blob. */
     private String name;
-    /** The version of this Commit. */
+    /** The version of this Blob. */
     private String version;
     /** The file */
     private File file;

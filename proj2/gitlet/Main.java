@@ -1,5 +1,7 @@
 package gitlet;
 
+import java.io.IOException;
+
 /** Driver class for Gitlet, a subset of the Git version-control system.
  *  @author Gily
  */
@@ -7,7 +9,7 @@ public class Main {
     /** Usage: java gitlet.Main ARGS, where ARGS contains
      *  <COMMAND> <OPERAND1> <OPERAND2> ... 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO: what if args is empty?
         if (args.length == 0) {
             System.out.println("Please enter a command");
@@ -22,6 +24,7 @@ public class Main {
             case "add":
                 // TODO: handle the `add [filename]` command
                 validateNumArgs(args, 2);
+                Repository.StagingAdd(args[1]);
                 break;
             case "commit":
                 // TODO: handle the 'commit [message]' command

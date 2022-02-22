@@ -251,4 +251,8 @@ class Utils {
         }
         System.exit(0);
     }
+
+    public static void CopyFile(File o, File d) throws IOException{
+        Files.copy(o.toPath(), d.toPath());
+    }
 }

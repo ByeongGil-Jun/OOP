@@ -2,6 +2,7 @@ package gitlet;
 
 // TODO: any imports you need here
 
+import java.io.Serializable;
 import java.util.Date; // TODO: You'll likely use this in this class
 import java.util.LinkedList;
 
@@ -15,7 +16,7 @@ import java.util.LinkedList;
  *
  *  @author Gily
  */
-public class Commit {
+public class Commit implements Serializable {
     /**
      * TODO: add instance variables here.
      *
@@ -28,23 +29,19 @@ public class Commit {
     private String message;
     /** The date of this Commit. */
     private Date date;
-    /** The author of this Commit. */
-    private String author;
     /** The reference to a tree. */
     private String tree;
     /** The reference to a parent. */
     private String parent;
     /** The log of this Commit. */
     private String log;
+    /** The sha1 of this Commit. */
+    private String sha1;
     /** The file list of this Commit. */
     private LinkedList files = new LinkedList();
 
     /* TODO: fill in the rest of this class. */
     public Commit(String mes) {
-        message = mes;
-        date = new Date();
-    }
-    public Commit(String mes, String log) {
         message = mes;
         date = new Date();
     }
